@@ -32,40 +32,53 @@ namespace seng301_asgn1 {
 
         public VendingMachineFactory() {
             // TODO: Implement
+            System.Console.WriteLine("vending Machine is run");
         }
 
         public int createVendingMachine(List<int> coinKinds, int selectionButtonCount) {
             // TODO: Implement
+            System.Console.WriteLine("create Vending Machine");
             return 0;
         }
 
         public void configureVendingMachine(int vmIndex, List<string> popNames, List<int> popCosts) {
             // TODO: Implement
+            System.Console.WriteLine("configure Vending Machine");
         }
 
         public void loadCoins(int vmIndex, int coinKindIndex, List<Coin> coins) {
             // TODO: Implement
+            //open door
+            //insert coin
+            //verify coin
+            //increase coin count in machine
+            System.Console.WriteLine("load Coins is run");
         }
 
         public void loadPops(int vmIndex, int popKindIndex, List<Pop> pops) {
             // TODO: Implement
+            System.Console.WriteLine("loadPops is run");
         }
 
         public void insertCoin(int vmIndex, Coin coin) {
             // TODO: Implement
+            System.Console.WriteLine("insertCoins is run");
         }
 
         public void pressButton(int vmIndex, int value) {
             // TODO: Implement
+            System.Console.WriteLine("pressButton is run");
         }
 
         public List<Deliverable> extractFromDeliveryChute(int vmIndex) {
             // TODO: Implement
+            System.Console.WriteLine("extractFromDeliveryChute is run");
             return new List<Deliverable>();
         }
 
         public List<IList> unloadVendingMachine(int vmIndex) {
             // TODO: Implement
+            System.Console.WriteLine("unloadVendingMachine is run");
             return new List<IList>() {
                 new List<Coin>(),
                 new List<Coin>(),
