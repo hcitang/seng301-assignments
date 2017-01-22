@@ -69,6 +69,9 @@ namespace Frontend1.Parser {
             foreach (var coin in coinsUsedForPayment) {
                 totalCoinsUsed -= ((Coin) coin).Value;
             }
+            if (! ((totalChangeRemaining == 0) && (totalCoinsUsed == 0))) {
+                result = false;
+            }            
             if (popsRemaining.Count != unsoldPops.Count) {
                 result = false;
             }
