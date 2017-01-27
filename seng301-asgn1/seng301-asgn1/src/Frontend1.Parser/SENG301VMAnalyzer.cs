@@ -57,7 +57,7 @@ namespace Frontend1.Parser {
             vm.insertCoin(vmIndex, coin);
         }
 
-        private void CheckTeardown(int totalChangeRemaining, int totalCoinsUsed, List<Pop> popsRemaining) {
+        private bool CheckTeardown(int totalChangeRemaining, int totalCoinsUsed, List<Pop> popsRemaining) {
             var result = true;
             var coinsRemaining = this.teardown[0];
             var coinsUsedForPayment = this.teardown[1];
@@ -71,7 +71,7 @@ namespace Frontend1.Parser {
             }
             if (! ((totalChangeRemaining == 0) && (totalCoinsUsed == 0))) {
                 result = false;
-            }            
+            }   
             if (popsRemaining.Count != unsoldPops.Count) {
                 result = false;
             }
@@ -86,10 +86,10 @@ namespace Frontend1.Parser {
                     }
                 }
             }
-            Console.WriteLine("CHECK_TEARDOWN: " + (result ? "PASS" : "FAIL"));
+            return result;
         }
 
-        private void CheckDelivery(int totalCoinValue, List<Pop> popsDelivered) {
+        private bool CheckDelivery(int totalCoinValue, List<Pop> popsDelivered) {
             var result = true;
             foreach (var item in this.extraction) {
                 if (item is Coin) {
@@ -108,7 +108,7 @@ namespace Frontend1.Parser {
             if (! ((totalCoinValue == 0) && (popsDelivered.Count == 0))) {
                 result = false;
             }
-            Console.WriteLine("CHECK_DELIVERY: " + (result ? "PASS" : "FAIL"));
+            return result;
         }
 
         /**
@@ -366,7 +366,9 @@ namespace Frontend1.Parser {
                 pops.Add(new Pop((string) values[i]));
             }
 
-            this.CheckDelivery(totalCoinValue, pops);
+            if (!this.CheckDelivery(totalCoinValue, pops)) {
+                throw new Exception("CHECK_DELIVERY: FAIL");
+            }
             return node;
         }
 
@@ -390,9 +392,11 @@ namespace Frontend1.Parser {
                 pops.Add(new Pop((string) values[i]));
             }
 
-            this.CheckTeardown(totalChangeRemaining, totalCoinsUsed, pops);
+            if (!this.CheckTeardown(totalChangeRemaining, totalCoinsUsed, pops)) {
+                throw new Exception("CHECK_TEARDOWN: FAIL");
+            }
             return node;
         }
     }
 
-}
+}F
