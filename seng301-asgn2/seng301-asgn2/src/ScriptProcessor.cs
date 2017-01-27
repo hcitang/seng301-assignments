@@ -1,8 +1,8 @@
 ﻿using System;
 using System.IO;
 
-using Frontend1;
-using Frontend1.Parser;
+using Frontend2;
+using Frontend2.Parser;
 
 public class ScriptProcessor {
     VendingMachineParser parser;
