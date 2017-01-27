@@ -1,8 +1,8 @@
 ﻿using System;
 using System.IO;
 
-using Frontend2;
-using Frontend2.Parser;
+using Frontend1;
+using Frontend1.Parser;
 
 public class ScriptProcessor {
     VendingMachineParser parser;
@@ -23,6 +23,8 @@ public class ScriptProcessor {
     }
     
     public static void Main(string[] args) {
+        int totalTests = 0;
+        int passedTests = 0;
         var goodScripts = Directory.GetFiles("test-scripts", "T*");
         foreach(var script in goodScripts) {
             var pass = true;
@@ -35,6 +37,10 @@ public class ScriptProcessor {
                 pass = false;
             }
             Console.WriteLine(pass ? " PASS=Good" : " FAIL=Bad");
+            if (pass) {
+                passedTests++;
+            }
+            totalTests++;
         }
         var badScripts = Directory.GetFiles("test-scripts", "U*");
         foreach(var script in badScripts) {
@@ -48,6 +54,12 @@ public class ScriptProcessor {
                 pass = false;
             }
             Console.WriteLine(pass ? " PASS=Bad" : " FAIL=Good");
+            if (!pass) {
+                passedTests++;
+            }
+            totalTests++;
         }
+
+        Console.WriteLine("{0}/{1} tests passed", passedTests, totalTests);
     }
 }
