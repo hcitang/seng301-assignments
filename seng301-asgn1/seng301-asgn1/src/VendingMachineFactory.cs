@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System;
 
 using Frontend1;
 
@@ -30,59 +31,66 @@ namespace seng301_asgn1 {
     /// </summary>
     public class VendingMachineFactory : IVendingMachineFactory {
 
+        private List<VendingMachine> machineList = new List<VendingMachine>();
+
+
         public VendingMachineFactory() {
-            // TODO: Implement
-            System.Console.WriteLine("vending Machine is run");
+            //System.Console.WriteLine("vending Machine Factory is run");
+           
         }
 
         public int createVendingMachine(List<int> coinKinds, int selectionButtonCount) {
-            // TODO: Implement
-            System.Console.WriteLine("create Vending Machine");
+
+            VendingMachine tempMachine = new VendingMachine(coinKinds, selectionButtonCount);
+            machineList.Add(tempMachine);
             return 0;
         }
 
         public void configureVendingMachine(int vmIndex, List<string> popNames, List<int> popCosts) {
-            // TODO: Implement
-            System.Console.WriteLine("configure Vending Machine");
+            if (machineList[vmIndex].GetType() == typeof(VendingMachine))   //type checking son.
+            {
+                machineList[vmIndex].addPopTypes(popNames, popCosts);
+            }
+            else
+            {
+                throw new Exception("This machine doesn't exist");
+            }
+            //System.Console.WriteLine("configure Vending Machine");
+
         }
 
         public void loadCoins(int vmIndex, int coinKindIndex, List<Coin> coins) {
-            // TODO: Implement
-            //open door
-            //insert coin
-            //verify coin
-            //increase coin count in machine
-            System.Console.WriteLine("load Coins is run");
+            machineList[vmIndex].addCoins(coins[0].Value, coinKindIndex, coins.Count);
+            //System.Console.WriteLine("load Coins is run");
         }
 
         public void loadPops(int vmIndex, int popKindIndex, List<Pop> pops) {
-            // TODO: Implement
-            System.Console.WriteLine("loadPops is run");
+            machineList[vmIndex].addPops(pops[0].ToString(), popKindIndex, pops.Count);
+            //System.Console.WriteLine("loadPops is run");
+            
         }
 
         public void insertCoin(int vmIndex, Coin coin) {
-            // TODO: Implement
-            System.Console.WriteLine("insertCoins is run");
+            machineList[vmIndex].inputCoin(coin);
+            //System.Console.WriteLine("insertCoins is run");
         }
 
         public void pressButton(int vmIndex, int value) {
-            // TODO: Implement
-            System.Console.WriteLine("pressButton is run");
+            machineList[vmIndex].pressButton(value);
+            //System.Console.WriteLine("pressButton is run");
         }
 
         public List<Deliverable> extractFromDeliveryChute(int vmIndex) {
-            // TODO: Implement
-            System.Console.WriteLine("extractFromDeliveryChute is run");
-            return new List<Deliverable>();
+            List<Deliverable> tempList = machineList[vmIndex].extractFromChute();
+            //System.Console.WriteLine("extractFromDeliveryChute is run");
+            return tempList;
         }
 
         public List<IList> unloadVendingMachine(int vmIndex) {
-            // TODO: Implement
-            System.Console.WriteLine("unloadVendingMachine is run");
-            return new List<IList>() {
-                new List<Coin>(),
-                new List<Coin>(),
-                new List<Pop>() };
+            List<IList> tempList = machineList[vmIndex].teardownMachine();
+            //System.Console.WriteLine("unloadVendingMachine is run");
+            return tempList;
             }
     }
+    
 }
