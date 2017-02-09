@@ -11,7 +11,8 @@ namespace Frontend2.Hardware {
     *   - one coin receptacle (called the coin receptacle) to temporarily store
     * coins entered by the user;
     *   - one coin receptacle (called the storage bin) to store coins that have
-    * been accepted as payment;
+    * been accepted as payment, but do not fit into the coin racks (i.e. if the
+    * coin rack is full);
     *   - a set of one or more coin racks (the number and the denomination of coins
     * stored by each is specified in the constructor);
     *   - one delivery chute used to deliver pop cans and to return coins;
